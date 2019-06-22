@@ -77,7 +77,7 @@ bool getGlobalBoolean(lua_State* L, const char* identifier, const bool defaultVa
 	return val != 0;
 }
 
-float getGlobalFloat(lua_State* L, const char* identifier, const float defaultValue)
+float getGlobalFloat(lua_State* L, const char* identifier, const float defaultValue = 0.0)
 {
 	lua_getglobal(L, identifier);
 	if (!lua_isnumber(L, -1)) {
@@ -262,7 +262,7 @@ float ConfigManager::getFloat(floating_config_t what) const
 {
 	if (what >= LAST_FLOATING_CONFIG) {
 		std::cout << "[Warning - ConfigManager::getFloat] Accessing invalid index: " << what << std::endl;
-		return 0.0f;
+		return 0;
 	}
 	return floating[what];
 }
