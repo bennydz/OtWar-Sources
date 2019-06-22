@@ -4164,6 +4164,15 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			return false;
 		}
 
+		Monster* monster = attacker ? attacker->getMonster() : nullptr;
+		if (monster && monster->getLevel() > 0) {
+			float bonusDmg = g_config.getFloat(ConfigManager::MLVL_BONUSDMG) * monster->getLevel();
+			if (bonusDmg != 0.0) {
+				damage.primary.value += std::round(damage.primary.value * bonusDmg);
+				damage.secondary.value += std::round(damage.secondary.value * bonusDmg);
+			}
+		}		
+		
 		damage.primary.value = std::abs(damage.primary.value);
 		damage.secondary.value = std::abs(damage.secondary.value);
 
@@ -4426,6 +4435,20 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 bool Game::combatChangeMana(Creature* attacker, Creature* target, CombatDamage& damage)
 {
 	const Position& targetPos = target->getPosition();
+	
+	Monster* monster = attacker ? attacker->getMonster() : nullptr;
+	if (monster && monster->getLevel() > 0) {
+		float bonusDmg = g_config.getFloat(ConfigManager::MLVL_BONUSDMG) * monster->getLevel();
+		if (bonusDmg != 0.0) {
+			if (damage.primary.value < 0) {
+				damage.primary.value += std::round(damage.primary.value * bonusDmg);
+			}
+			if (damage.secondary.value < 0) {
+				damage.secondary.value += std::round(damage.secondary.value * bonusDmg);
+			}
+		}
+	}	
+	
 	int32_t manaChange = damage.primary.value + damage.secondary.value;
 	if (manaChange > 0) {
 		Player* attackerPlayer;
