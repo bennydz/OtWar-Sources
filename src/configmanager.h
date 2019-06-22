@@ -128,6 +128,14 @@ class ConfigManager
 		};
 
 		enum floating_config_t {
+			MLVL_BONUSDMG,
+			MLVL_BONUSSPEED,
+			MLVL_BONUSHP,
+
+			LAST_FLOATING_CONFIG
+		};		
+		
+		enum floating_config_t {
 			RATE_MONSTER_HEALTH,
 			RATE_MONSTER_ATTACK,
 			RATE_MONSTER_DEFENSE,
@@ -142,6 +150,7 @@ class ConfigManager
 		int32_t getNumber(integer_config_t what) const;
 		bool getBoolean(boolean_config_t what) const;
 		float getFloat(floating_config_t what) const;
+
 
 		std::string const& setConfigFileLua(const std::string& what) {
 			configFileLua = { what };

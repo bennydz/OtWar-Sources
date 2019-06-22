@@ -20,9 +20,9 @@
 #include "otpch.h"
 
 #include "monster.h"
-#include "configmanager.h"
 #include "game.h"
 #include "spells.h"
+#include "configmanager.h"
 //#include "events.h"
 
 extern Game g_game;
@@ -52,6 +52,7 @@ Monster::Monster(MonsterType* mType) :
 	defaultOutfit = mType->info.outfit;
 	currentOutfit = mType->info.outfit;
 	skull = mType->info.skull;
+	level = uniform_random(mType->info.minLevel, mType->info.maxLevel);
 	float multiplier = g_config.getFloat(ConfigManager::RATE_MONSTER_HEALTH);
 	health = mType->info.health*multiplier;
 	healthMax = mType->info.healthMax*multiplier;
@@ -59,6 +60,18 @@ Monster::Monster(MonsterType* mType) :
 	internalLight = mType->info.light;
 	hiddenHealth = mType->info.hiddenHealth;
 
+	if (level > 0) {
+		float bonusHp = g_config.getFloat(ConfigManager::MLVL_BONUSHP) * level;
+		if (bonusHp != 0.0) {
+			healthMax += healthMax * bonusHp;
+			health += health * bonusHp;
+		}
+		float bonusSpeed = g_config.getFloat(ConfigManager::MLVL_BONUSSPEED) * level;
+		if (bonusSpeed != 0.0) {
+			baseSpeed += baseSpeed * bonusSpeed;
+		}
+	}	
+	
 	// register creature events
 	for (const std::string& scriptName : mType->info.scripts) {
 		if (!registerCreatureEvent(scriptName)) {

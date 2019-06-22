@@ -77,10 +77,11 @@ bool getGlobalBoolean(lua_State* L, const char* identifier, const bool defaultVa
 	return val != 0;
 }
 
-float getGlobalFloat(lua_State* L, const char* identifier, const float defaultValue = 0.0)
+float getGlobalFloat(lua_State* L, const char* identifier, const float defaultValue = 0.0f)
 {
 	lua_getglobal(L, identifier);
 	if (!lua_isnumber(L, -1)) {
+		lua_pop(L, 1);
 		return defaultValue;
 	}
 
@@ -210,6 +211,10 @@ bool ConfigManager::load()
 	floating[RATE_MONSTER_ATTACK] = getGlobalFloat(L, "rateMonsterAttack", 1.0);
 	floating[RATE_MONSTER_DEFENSE] = getGlobalFloat(L, "rateMonsterDefense", 1.0);
 
+	floating[MLVL_BONUSDMG] = getGlobalFloat(L, "monsterBonusDamage", 0);
+	floating[MLVL_BONUSSPEED] = getGlobalFloat(L, "monsterBonusSpeed", 0);
+	floating[MLVL_BONUSHP] = getGlobalFloat(L, "monsterBonusHealth", 0);	
+	
 	loaded = true;
 	lua_close(L);
 	return true;
@@ -256,8 +261,8 @@ bool ConfigManager::getBoolean(boolean_config_t what) const
 float ConfigManager::getFloat(floating_config_t what) const
 {
 	if (what >= LAST_FLOATING_CONFIG) {
-		std::cout << "[Warning - ConfigManager::getFLoat] Accessing invalid index: " << what << std::endl;
-		return 0;
+		std::cout << "[Warning - ConfigManager::getFloat] Accessing invalid index: " << what << std::endl;
+		return 0.0f;
 	}
 	return floating[what];
 }

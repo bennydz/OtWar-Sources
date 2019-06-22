@@ -74,7 +74,7 @@ class Monster final : public Creature
 			return mType->nameDescription;
 		}
 		std::string getDescription(int32_t) const final {
-			return strDescription + '.';
+			return strDescription + ", level " + std::to_string(level) + '.';
 		}
 
 		CreatureType_t getType() const final {
@@ -134,6 +134,11 @@ class Monster final : public Creature
 		}
 
 		bool canWalkOnFieldType(CombatType_t combatType) const;
+		
+		int32_t getLevel() const {
+			return level;
+		}
+		
 		void onAttackedCreatureDisappear(bool isLogout) final;
 
 		void onCreatureAppear(Creature* creature, bool isLogin) final;
