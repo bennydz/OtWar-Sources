@@ -77,7 +77,7 @@ bool getGlobalBoolean(lua_State* L, const char* identifier, const bool defaultVa
 	return val != 0;
 }
 
-float getGlobalFloat(lua_State* L, const char* identifier, const float defaultValue = 0.0f)
+float getGlobalFloat(lua_State* L, const char* identifier, const float defaultValue)
 {
 	lua_getglobal(L, identifier);
 	if (!lua_isnumber(L, -1)) {
