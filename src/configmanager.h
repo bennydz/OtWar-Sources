@@ -126,20 +126,17 @@ class ConfigManager
 
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};
-
-		enum floating_config_t {
-			MLVL_BONUSDMG,
-			MLVL_BONUSSPEED,
-			MLVL_BONUSHP,
-
-			LAST_FLOATING_CONFIG
-		};		
+	
 		
 		enum floating_config_t {
 			RATE_MONSTER_HEALTH,
 			RATE_MONSTER_ATTACK,
 			RATE_MONSTER_DEFENSE,
 
+			MLVL_BONUSDMG,
+			MLVL_BONUSSPEED,
+			MLVL_BONUSHP,			
+			
 			LAST_FLOATING_CONFIG
 		};
 
