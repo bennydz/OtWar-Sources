@@ -35,7 +35,6 @@
 #include "waitlist.h"
 #include "ban.h"
 #include "scheduler.h"
-#include "monster.h"
 #include "databasetasks.h"
 #include "modules.h"
 

@@ -53,25 +53,12 @@ Monster::Monster(MonsterType* mType) :
 	currentOutfit = mType->info.outfit;
 	skull = mType->info.skull;
 	float multiplier = g_config.getFloat(ConfigManager::RATE_MONSTER_HEALTH);
-	level = uniform_random(mType->info.minLevel, mType->info.maxLevel);
 	health = mType->info.health*multiplier;
 	healthMax = mType->info.healthMax*multiplier;
 	baseSpeed = mType->info.baseSpeed;
 	internalLight = mType->info.light;
 	hiddenHealth = mType->info.hiddenHealth;
 
-	if (level > 0) {
-		float bonusHp = g_config.getFloat(ConfigManager::MLVL_BONUSHP) * level;
-		if (bonusHp != 0.0) {
-			healthMax += healthMax * bonusHp;
-			health += health * bonusHp;
-		}
-		float bonusSpeed = g_config.getFloat(ConfigManager::MLVL_BONUSSPEED) * level;
-		if (bonusSpeed != 0.0) {
-			baseSpeed += baseSpeed * bonusSpeed;
-		}
-	}	
-	
 	// register creature events
 	for (const std::string& scriptName : mType->info.scripts) {
 		if (!registerCreatureEvent(scriptName)) {
