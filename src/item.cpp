@@ -1054,6 +1054,56 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 
 					s << "speed " << std::showpos << (it.abilities->speed >> 1) << std::noshowpos;
 				}
+				
+				
+if (it.abilities->regeneration) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "+" << std::showpos << it.abilities->healthGain << std::noshowpos << " hp/s";
+            }
+            if (it.abilities->regeneration) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "+" << std::showpos << it.abilities->manaGain << std::noshowpos << " mana/s";
+            }
+            if (it.abilities->statsPercent[STAT_MAXHITPOINTS]) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "hp " << std::showpos << it.abilities->statsPercent[STAT_MAXHITPOINTS] - 100 << std::noshowpos << "%";
+            }
+            if (it.abilities->statsPercent[STAT_MAXMANAPOINTS]) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "mana " << std::showpos << it.abilities->statsPercent[STAT_MAXMANAPOINTS] - 100 << std::noshowpos << "%";
+            }				
+				
+				
+				
+				
 			}
 
 			if (!begin) {
@@ -1240,6 +1290,65 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 
 					s << "speed " << std::showpos << (it.abilities->speed >> 1) << std::noshowpos;
 				}
+				
+if (it.abilities->regeneration) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "+" << std::showpos << it.abilities->healthGain << std::noshowpos << " hp/s";
+            }
+            if (it.abilities->regeneration) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "+" << std::showpos << it.abilities->manaGain << std::noshowpos << " mana/s";
+            }
+            if (it.abilities->statsPercent[STAT_MAXHITPOINTS]) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "hp " << std::showpos << it.abilities->statsPercent[STAT_MAXHITPOINTS] - 100 << std::noshowpos << "%";
+            }
+            if (it.abilities->statsPercent[STAT_MAXMANAPOINTS]) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "mana " << std::showpos << it.abilities->statsPercent[STAT_MAXMANAPOINTS] - 100 << std::noshowpos << "%";
+            }				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 
 			if (!begin) {
@@ -1399,6 +1508,61 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 
 				s << "speed " << std::showpos << (it.abilities->speed >> 1) << std::noshowpos;
 			}
+			
+			
+if (it.abilities->regeneration) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "+" << std::showpos << it.abilities->healthGain << std::noshowpos << " hp/s";
+            }
+            if (it.abilities->regeneration) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "+" << std::showpos << it.abilities->manaGain << std::noshowpos << " mana/s";
+            }
+            if (it.abilities->statsPercent[STAT_MAXHITPOINTS]) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "hp " << std::showpos << it.abilities->statsPercent[STAT_MAXHITPOINTS] - 100 << std::noshowpos << "%";
+            }
+            if (it.abilities->statsPercent[STAT_MAXMANAPOINTS]) {
+                if (begin) {
+                    begin = false;
+                    s << " (";
+                }
+                else {
+                    s << ", ";
+                }
+
+                s << "mana " << std::showpos << it.abilities->statsPercent[STAT_MAXMANAPOINTS] - 100 << std::noshowpos << "%";
+            }			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 
 		if (!begin) {
